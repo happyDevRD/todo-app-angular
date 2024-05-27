@@ -1,12 +1,17 @@
 {
-  "name": "untitled3",
+  "name": "todo",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "build:href": "ng build --base-href ./",
+    "clean:docs": "rm -rf docs",
+    "copy:dist": "mkdir -p docs && cp -r dist/todo/* docs/",
+    "build:github": "npm run clean:docs && npm run build:href && npm run copy:dist",
+    "push:github": "git add docs && git commit -m 'Deploy to GitHub Pages' && git push origin main"
   },
   "private": true,
   "dependencies": {
