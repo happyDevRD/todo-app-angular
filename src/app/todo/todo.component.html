@@ -1,0 +1,43 @@
+<section class="vh-100 gradient-custom">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col col-xl-10">
+        <div class="card">
+          <div class="card-body p-5">
+            <form class="d-flex justify-content-center align-items-center mb-4" (ngSubmit)="addTask()">
+              <div data-mdb-input-init class="form-outline flex-fill">
+                <input type="text" id="form2" class="form-control" [(ngModel)]="newTask" name="task" required/>
+                <label class="form-label" for="form2">New task...</label>
+              </div>
+              <button type="submit" data-mdb-button-init data-mdb-ripple-init class="btn btn-info ms-2">Add</button>
+            </form>
+            <ul class="nav nav-tabs mb-4 pb-2" id="ex1" role="tablist">
+              <li class="nav-item" role="presentation">
+                <a class="nav-link" [class.active]="filter === 'all'" (click)="filterTasks('all')" href="#">All</a>
+              </li>
+              <li class="nav-item" role="presentation">
+                <a class="nav-link" [class.active]="filter === 'active'" (click)="filterTasks('active')"
+                   href="#">Active</a>
+              </li>
+              <li class="nav-item" role="presentation">
+                <a class="nav-link" [class.active]="filter === 'completed'" (click)="filterTasks('completed')" href="#">Completed</a>
+              </li>
+            </ul>
+            <div>
+              <ul class="list-group mb-0">
+                <li *ngFor="let task of filteredTasks"
+                    class="list-group-item d-flex align-items-center border-0 mb-2 rounded"
+                    [ngClass]="{'completed': task.completed}" style="background-color: #f4f6f7;">
+                  <input class="form-check-input me-2" type="checkbox" [(ngModel)]="task.completed"
+                         (change)="updateTask(task)"/>
+                  <span [class.text-decoration-line-through]="task.completed">{{ task.name }}</span>
+                  <button class="btn btn-danger btn-sm ms-auto" (click)="deleteTask(task)">Delete</button>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
